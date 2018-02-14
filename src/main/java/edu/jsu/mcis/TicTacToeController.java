@@ -23,11 +23,11 @@ public class TicTacToeController {
 
     }
 
-    public void controlModel() {
+    /*public void controlModel() {
         
         /* Prompt player for next move using view's showNextMovePrompt() */
         
-        view.showNextMovePrompt();
+        /*view.showNextMovePrompt();
 		int row = keyboard.nextInt();
 		int col = keyboard.nextInt();
 		if(model.isValidSquare(row,col) && !model.isSquareMarked(row,col)){
@@ -45,6 +45,6 @@ public class TicTacToeController {
         /* INSERT YOUR CODE HERE */
 
         
-    }
+    /*}*/
 
 }

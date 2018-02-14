@@ -119,7 +119,7 @@ public class TicTacToeModel{
     }
 	
     public boolean isSquareMarked(int row, int col) {
-        if(grid[row][col] == Mark.X || grid[row][col] == Mark.O){
+        if(getMark(row,col) != Mark.EMPTY){
 			return true;
 		}
 		else{
@@ -165,68 +165,52 @@ public class TicTacToeModel{
 
     }
 	
-    private boolean isMarkWin(Mark mark) {
-		int consecutiveMarks = 0;
+    public boolean isMarkWin(Mark mark) {
+		boolean won = true;
 		//vertical
-		for(int i = 0; i < width; ++i){
-			for(int j = 0; j < width; ++j){
-				if(getMark(i,j).equals(mark)){
-					consecutiveMarks ++;
-					if(consecutiveMarks == width){
-						return true;
+		for(int j = 0; j < width; ++j){
+			won = true;
+			for(int i = 0; i < width; ++i){
+				if(!getMark(i,j).equals(mark)){
+					won = false;
 				}
-				}
-				else{
-					consecutiveMarks = 0;
-                                        break;
-				}
+			}
+			if(won){
+				return true;
 			}
 		}
 		//horizontal
-		consecutiveMarks = 0;
 		for(int i = 0; i < width; ++i){
+			won = true;
 			for(int j = 0; j < width; ++j){
-				if(getMark(j,i).equals(mark)){
-					consecutiveMarks ++;
-                    if(consecutiveMarks == width){
-                        return true;
-                   }
+				if(!getMark(i,j).equals(mark)){
+					won = false;
 				}
-				else{
-					consecutiveMarks = 0;
-                        break;
-				}
+			}
+			if(won){
+				return true;
 			}
 		}
 		//diagonal
-		consecutiveMarks = 0;
+		won = true;
 		for(int i = 0; i < width; ++i){
-			if(getMark(i,i).equals(mark)){
-				consecutiveMarks ++;
-                if(consecutiveMarks == width){
-                    return true;
-                    }
-			}
-			else{
-				consecutiveMarks = 0;
-                    break;
+			if(!getMark(i,i).equals(mark)){
+				won = false;
 			}
 		}
-		consecutiveMarks = 0;
+		if(won){
+			return true;
+		}
+		won = true;
 		for(int i = 0; i < width; ++i){
-			if(!getMark(width - 1 -i,i).equals(mark)){
-				consecutiveMarks = 0;
-                    break;
+			if(!getMark(i,width - i - 1).equals(mark)){
+				won = false;
 			}
-			else{
-				consecutiveMarks ++;
-                if(consecutiveMarks == width){
-                    return true;
-                    }
-			}
+		}
+		if(won){
+			return true;
 		}
 		return false;
-	}
 				
 			
 			
@@ -235,9 +219,9 @@ public class TicTacToeModel{
         
         /* INSERT YOUR CODE HERE */
 
-    
+    }
 	
-    private boolean isTie() {
+    public boolean isTie() {
 		for(int i = 0; i < width; ++i){
 			for(int j = 0; j < width; ++j){
 				if(getMark(i,j).equals(Mark.EMPTY)){
